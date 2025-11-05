@@ -36,3 +36,19 @@ jobs:
               run: |
                   docker buildx build --platform linux/amd64 -f Dockerfile -t ${{ env.REGISTRY }}/${{ env.PROJECT }}/${{ env.NAMESPACE }}:${{ steps.create-image-tag.outputs.IMAGE_TAG }} .
                   docker push ${{ env.REGISTRY }}/${{ env.PROJECT }}/${{ env.NAMESPACE }}:${{ steps.create-image-tag.outputs.IMAGE_TAG }}
+    deploy-blackpaws:
+        runs-on: [self-hosted, macOS]
+        needs: build-and-deploy-docker-image
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  repository: 'blackfoot-makers/deployments'
+            - name: Terraform apply
+              run: |
+                  cd ${{ env.NAMESPACE }}
+                  terraform init
+                  terraform apply \
+                    -var="IMAGE_TAG=${{ needs.build-and-deploy-docker-image.outputs.IMAGE_TAG }}" \
+                    -auto-approve
