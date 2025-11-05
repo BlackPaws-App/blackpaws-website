@@ -1,11 +1,13 @@
 <script lang="ts">
-	import '../app.css';
-	
+  import favicon from "$lib/assets/favicon.png";
+  import "../app.css";
 </script>
+
 <svelte:head>
-    <title>BlackPaws SAS</title> 
+  <title>BlackPaws SAS</title>
+  <link rel="icon" href={favicon} />
 </svelte:head>
 
 <main>
-	<slot />
+  <slot />
 </main>
