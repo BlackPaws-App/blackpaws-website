@@ -68,7 +68,7 @@
 
 <section class="cta">
   <h2>Ready to Build Your Next Project?</h2>
-  <a href="mailto:contact@blackpaws.com">Contact Us</a>
+  <a href="mailto:hello@blackpaws.fr">Contact Us</a>
 </section>
 
 <footer>
