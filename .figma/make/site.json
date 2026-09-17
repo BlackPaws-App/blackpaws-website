@@ -1,0 +1,10 @@
+{
+  "description": "Showcases BlackPaws' custom web and mobile app development services with a visually stunning, responsive landing page and case studies for potential clients.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
