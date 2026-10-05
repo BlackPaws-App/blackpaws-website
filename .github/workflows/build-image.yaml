@@ -44,11 +44,9 @@ jobs:
               uses: actions/checkout@v4
               with:
                   ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-                  repository: 'blackfoot-makers/deployments'
-            - name: Terraform apply
+                  repository: "blackfoot-makers/deployments"
+            - name: Deploy blackpaws
               run: |
-                  cd ${{ env.NAMESPACE }}
-                  terraform init
-                  terraform apply \
-                    -var="IMAGE_TAG=${{ needs.build-and-deploy-docker-image.outputs.IMAGE_TAG }}" \
-                    -auto-approve
+                  kubectl -n ${{ env.NAMESPACE }} set image deployment/blackpaws blackpaws=${{ env.REGISTRY }}/${{ env.PROJECT }}/${{ env.NAMESPACE }}:${{ needs.build-and-deploy-docker-image.outputs.IMAGE_TAG }}
+                  kubectl -n ${{ env.NAMESPACE }} rollout status deployment/blackpaws
+                  kubectl -n ${{ env.NAMESPACE }} get service blackpaws
