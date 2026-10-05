@@ -11,7 +11,7 @@ type HeaderProps = {
 
 function BlackPawsLogo({ color }: { color: string }) {
   return (
-    <div className="w-[85px] h-[85px] shrink-0" aria-label="BlackPaws logo">
+    <div className="w-[64px] h-[64px] shrink-0 md:w-[85px] md:h-[85px]" aria-label="BlackPaws logo">
       <svg viewBox="0 0 78.4838 62.2135" fill="none" className="w-full h-full">
         <g>
           <path d={svgPaths.pa38b540} fill={color} style={{ transition: 'fill 0.4s ease' }} />
@@ -23,10 +23,10 @@ function BlackPawsLogo({ color }: { color: string }) {
   );
 }
 
-function MobileMenu({ onClose, onNav }: { onClose: () => void; onNav: (href: string) => void }) {
+function MobileMenu({ onClose, onNav, closing }: { onClose: () => void; onNav: (href: string) => void; closing: boolean }) {
   return (
     <div
-      className="fixed inset-0 z-[100] flex flex-col md:hidden menu-enter"
+      className={`fixed inset-0 z-[100] flex flex-col md:hidden ${closing ? 'menu-exit' : 'menu-enter'}`}
       style={{ background: 'rgba(67,43,96,0.96)' }}
       aria-modal="true"
       role="dialog"
@@ -120,7 +120,13 @@ export default function Header({ transparent = true }: HeaderProps) {
   const isHome = pathname === '/';
   const activeId = useScrollSpy(['services', 'approach', 'team']);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const closeMenu = () => {
+    setMenuClosing(true);
+    setTimeout(() => { setMenuOpen(false); setMenuClosing(false); }, 340);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -129,7 +135,8 @@ export default function Header({ transparent = true }: HeaderProps) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const logoColor = !transparent || scrolled ? '#432b60' : 'white';
+  const isTransparent = transparent && !scrolled;
+  const logoColor = !isTransparent ? '#432b60' : 'white';
 
   const navLinkClass = (href: string) => {
     const id = href.slice(1);
@@ -138,7 +145,7 @@ export default function Header({ transparent = true }: HeaderProps) {
   };
 
   const handleNav = (href: string) => {
-    setMenuOpen(false);
+    closeMenu();
     if (isHome) {
       setTimeout(() => scrollToSection(href), 80);
     } else {
@@ -178,29 +185,29 @@ export default function Header({ transparent = true }: HeaderProps) {
           {/* Mobile hamburger → croix */}
           <button
             type="button"
-            className="md:hidden ml-auto p-2 flex flex-col justify-center items-center w-10 h-10 gap-0 text-white relative z-[110] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="md:hidden ml-auto p-2 flex flex-col justify-center items-center w-10 h-10 gap-0 relative z-[110] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
             aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
             aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((v) => !v)}
+            onClick={() => menuOpen ? closeMenu() : setMenuOpen(true)}
           >
             <span
-              className="block h-[2px] w-6 bg-current rounded-full transition-all duration-300 ease-in-out"
-              style={{ transformOrigin: '77% center', transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'translateY(-4px)' }}
+              className="block h-[2px] w-6 rounded-full transition-all duration-300 ease-in-out"
+              style={{ background: menuOpen ? 'white' : (isTransparent ? 'white' : '#432b60'), transformOrigin: '77% center', transform: menuOpen ? 'translateY(7px) rotate(45deg)' : 'translateY(-4px)' }}
             />
             <span
-              className="block h-[2px] w-6 bg-current rounded-full transition-all duration-200 ease-in-out"
-              style={{ opacity: menuOpen ? 0 : 1, transform: menuOpen ? 'scaleX(0)' : 'scaleX(1)' }}
+              className="block h-[2px] w-6 rounded-full transition-all duration-200 ease-in-out"
+              style={{ background: menuOpen ? 'white' : (isTransparent ? 'white' : '#432b60'), opacity: menuOpen ? 0 : 1, transform: menuOpen ? 'scaleX(0)' : 'scaleX(1)' }}
             />
             <span
-              className="block h-[2px] w-6 bg-current rounded-full transition-all duration-300 ease-in-out"
-              style={{ transformOrigin: '77% center', transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'translateY(4px)' }}
+              className="block h-[2px] w-6 rounded-full transition-all duration-300 ease-in-out"
+              style={{ background: menuOpen ? 'white' : (isTransparent ? 'white' : '#432b60'), transformOrigin: '77% center', transform: menuOpen ? 'translateY(-7px) rotate(-45deg)' : 'translateY(4px)' }}
             />
           </button>
         </nav>
         </div>
       </header>
 
-      {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} onNav={handleNav} />}
+      {(menuOpen || menuClosing) && <MobileMenu onClose={closeMenu} onNav={handleNav} closing={menuClosing} />}
     </>
   );
 }

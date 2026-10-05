@@ -24,7 +24,12 @@ export default function Footer() {
                 {FOOTER.contact.headline}
               </h2>
               <p className="font-body text-[22px] text-brand">{FOOTER.contact.subheadline}</p>
-              <Button href={FOOTER.contact.ctaHref} variant="primary">
+              <Button
+                href={FOOTER.contact.ctaHref}
+                variant="primary"
+                noInlinePadding
+                className="items-center py-0"
+              >
                 {FOOTER.contact.cta}
               </Button>
             </div>

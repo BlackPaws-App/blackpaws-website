@@ -1,8 +1,16 @@
 import { useState, useRef } from 'react';
-import imgWorkshop from '../../imports/DesktopBlackPaws/Workshop.png';
-import imgReview from '../../imports/DesktopBlackPaws/Technical review.png';
-import imgRequirements from '../../imports/DesktopBlackPaws/Requirement analysis.png';
-import imgIdeation from '../../imports/DesktopBlackPaws/Ideation.png';
+import imgWorkshop from '@/imports/consulting-workshops.png';
+import imgReview from '@/imports/consulting-technical-review.png';
+import imgRequirements from '@/imports/consulting-requirement-analysis.png';
+import imgIdeation from '@/imports/design-ideation.png';
+import imgProduction from '@/imports/design-production.png';
+import imgQualityControl from '@/imports/design-quality-control.png';
+import imgWebDevelopment from '@/imports/development-web-application.png';
+import imgMobileDevelopment from '@/imports/development-mobile-application.png';
+import imgApiDevelopment from '@/imports/development-api.png';
+import imgFundraising from '@/imports/prototyping-fundraising.png';
+import imgUserTests from '@/imports/prototyping-user-tests.png';
+import imgAcceleratedDevelopment from '@/imports/prototyping-accelerated-development.png';
 import { SERVICES } from '@/data/content';
 import Button from '@/components/primitives/Button';
 
@@ -11,6 +19,14 @@ const SERVICE_IMAGES: Record<string, string> = {
   'Technical review': imgReview,
   'Requirement analysis': imgRequirements,
   Ideation: imgIdeation,
+  Production: imgProduction,
+  'Quality control': imgQualityControl,
+  'Web Application Development': imgWebDevelopment,
+  'Mobile Application Development': imgMobileDevelopment,
+  'API Development': imgApiDevelopment,
+  Fundraising: imgFundraising,
+  'Users tests': imgUserTests,
+  'Accelerated development': imgAcceleratedDevelopment,
 };
 
 function ChevronIcon({ open }: { open: boolean }) {

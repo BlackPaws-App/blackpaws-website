@@ -17,10 +17,10 @@ function BlackPawsLogoDark() {
   );
 }
 
-function MobileMenu({ onClose, onNav }: { onClose: () => void; onNav: (href: string) => void }) {
+function MobileMenu({ onClose, onNav, closing }: { onClose: () => void; onNav: (href: string) => void; closing: boolean }) {
   return (
     <div
-      className="fixed inset-0 z-[100] flex flex-col md:hidden menu-enter"
+      className={`fixed inset-0 z-[100] flex flex-col md:hidden ${closing ? 'menu-exit' : 'menu-enter'}`}
       style={{ background: 'rgba(67,43,96,0.96)' }}
       aria-modal="true"
       role="dialog"
@@ -99,10 +99,16 @@ function MobileMenu({ onClose, onNav }: { onClose: () => void; onNav: (href: str
 
 export default function ContactHeader() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuClosing, setMenuClosing] = useState(false);
   const navigate = useNavigate();
 
+  const closeMenu = () => {
+    setMenuClosing(true);
+    setTimeout(() => { setMenuOpen(false); setMenuClosing(false); }, 340);
+  };
+
   const handleNav = (href: string) => {
-    setMenuOpen(false);
+    closeMenu();
     setTimeout(() => navigate(`/${href}`), 80);
   };
 
@@ -133,7 +139,7 @@ export default function ContactHeader() {
               className="md:hidden ml-auto p-2 flex flex-col justify-center items-center w-10 h-10 gap-0 text-brand relative z-[110] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               aria-label={menuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
               aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((v) => !v)}
+              onClick={() => menuOpen ? closeMenu() : setMenuOpen(true)}
             >
               <span
                 className="block h-[2px] w-6 rounded-full transition-all duration-300 ease-in-out"
@@ -164,7 +170,7 @@ export default function ContactHeader() {
         </div>
       </header>
 
-      {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} onNav={handleNav} />}
+      {(menuOpen || menuClosing) && <MobileMenu onClose={closeMenu} onNav={handleNav} closing={menuClosing} />}
     </>
   );
 }

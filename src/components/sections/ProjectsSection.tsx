@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import imgProject1 from '@imports/4a4da4a72a3ff6f5602e1935ba9d62a5d339ede6.png';
-import imgProject2 from '@/imports/image.png';
+import imgProject2 from '@/imports/source-project-thumbnail.png';
 import imgProject3 from '@/imports/image-1.png';
 import imgProject4 from '@/imports/image-13.png';
 import imgProject5 from '@/imports/image-14.png';
@@ -66,7 +66,8 @@ function ProjectCard({ project }: { project: Project }) {
       <div
         className="absolute inset-0"
         style={{
-          background: 'linear-gradient(to top, #432b60 0%, rgba(67,43,96,0) 30.246%)',
+          background:
+            'linear-gradient(to top, rgba(31,19,45,0.98) 0%, rgba(67,43,96,0.8) 32%, rgba(67,43,96,0) 58%)',
           mixBlendMode: 'multiply',
         }}
         aria-hidden="true"
@@ -96,7 +97,7 @@ function ProjectCard({ project }: { project: Project }) {
 
         <div className="flex items-end justify-between">
           <div className="flex flex-col gap-2">
-            <p className="font-display text-[18px] text-white">{project.title}</p>
+            <p className="font-display text-[18px] leading-snug text-white">{project.title}</p>
             <p className="font-label font-extrabold text-[12px] text-white uppercase tracking-wide">
               {project.client}
             </p>

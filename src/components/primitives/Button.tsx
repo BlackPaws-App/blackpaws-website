@@ -8,6 +8,7 @@ type ButtonProps = {
   variant?: ButtonVariant;
   children: React.ReactNode;
   className?: string;
+  noInlinePadding?: boolean;
 };
 
 const ArrowIcon = () => (
@@ -32,9 +33,11 @@ export default function Button({
   variant = 'primary',
   children,
   className = '',
+  noInlinePadding = false,
 }: ButtonProps) {
-  const base =
-    'inline-flex items-center gap-4 pl-[79px] pr-12 h-[54px] rounded-[48px] font-body text-[22px] text-brand whitespace-nowrap transition-opacity duration-200 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand cursor-pointer';
+  const base = `inline-flex items-center gap-4 ${
+    noInlinePadding ? 'px-0 justify-center' : 'pl-[79px] pr-12'
+  } h-[54px] rounded-[48px] font-body text-[22px] text-brand whitespace-nowrap transition-opacity duration-200 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand cursor-pointer`;
 
   const variants: Record<ButtonVariant, string> = {
     primary: 'bg-rose-30',

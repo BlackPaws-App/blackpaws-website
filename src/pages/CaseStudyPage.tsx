@@ -32,7 +32,7 @@ function ProjectHero({ study }: { study: CaseStudy }) {
             <img
               src={study.clientLogo}
               alt={`Logo ${study.subtitle}`}
-              className="h-[43px] w-auto object-contain shrink-0"
+              className={`${study.id === 'project-1' ? 'h-[43px]' : 'h-[72px]'} w-auto object-contain shrink-0`}
             />
           )}
         </div>
@@ -188,7 +188,7 @@ function CaseStudyCTAs() {
 
 function PrevNext({ prev, next }: { prev?: CaseStudy; next?: CaseStudy }) {
   return (
-    <div className="w-full bg-brand">
+    <div className="w-full bg-white">
       <div className="max-w-[1280px] mx-auto px-10 md:px-[170px] py-8 flex items-center justify-between">
         {prev ? (
           <Link

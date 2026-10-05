@@ -32,6 +32,11 @@ export default function LogosSection() {
         .group:hover .marquee-track {
           animation-play-state: running;
         }
+        @media (max-width: 1023px) {
+          .marquee-track {
+            animation-play-state: running;
+          }
+        }
       `}</style>
 
       <div
