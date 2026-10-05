@@ -1,7 +1,7 @@
-import svgPaths from "./svg-6j4zn71xm4";
 import imgImageSxKrXPq5Lwl3Yt1N6RhzLkBsy0Suxp from "./71b72c14027fdb7ecf421eba8cb451cd2750bdc8.png";
-import imgImage3JynLpogg5ZknunPaBpdOpEjJmZn5R from "./e4f34542a47f0780d4849110c2d01669882aab36.png";
 import imgImageGngLsMOruOXjdF1Rtx2AjfpU3YzrIs1 from "./85240cb9b090b34d6f9a053f5a52223b573f244d.png";
+import imgImage3JynLpogg5ZknunPaBpdOpEjJmZn5R from "./e4f34542a47f0780d4849110c2d01669882aab36.png";
+import svgPaths from "./svg-6j4zn71xm4";
 type NavbarProps = {
   className?: string;
   navbar?: "Default";
@@ -93,7 +93,7 @@ function Frame() {
   return (
     <div className="[word-break:break-word] content-stretch flex flex-col gap-[8px] items-start leading-[normal] not-italic relative shrink-0 text-[#432b60] w-[220px]">
       <p className="font-['Forma_DJR_Micro:Bold',sans-serif] relative shrink-0 text-[22px] w-full">{`Contact email `}</p>
-      <p className="font-['Forma_DJR_Micro:Regular',sans-serif] relative shrink-0 text-[16px] w-full">contact@blackpaws.com</p>
+      <p className="font-['Forma_DJR_Micro:Regular',sans-serif] relative shrink-0 text-[16px] w-full">contact@blackpaws.fr</p>
     </div>
   );
 }

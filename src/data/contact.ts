@@ -2,7 +2,7 @@
 export const CONTACT_ENDPOINT = '/api/contact';
 
 export const CONTACT_INFO = {
-  email: 'contact@blackpaws.com',
+  email: 'contact@blackpaws.fr',
   address: ['122 Rue Amelot', '75011 Paris, France'],
   github: { label: 'Our Github', href: 'https://github.com/BlackPaws-App' },
 };
